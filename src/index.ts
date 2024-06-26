@@ -13,7 +13,6 @@ app.use(cors());
 
 app.use("/api", router);
 
-
 const port = process.env.PORT || 5000;
 
 async function startServer() {
