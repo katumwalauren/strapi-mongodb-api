@@ -4,8 +4,8 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import { connectToMongoDB } from "./database";
-import router from "./createUser"; 
-import SomeModel from "./models/SomeModel";
+import router from "./routes"; 
+import SomeModel from "./models/UserModel";
 
 const app = express();
 app.use(express.json());
