@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { getConnectedClient } from './database';
-import {MongoClient, ObjectId, Collection } from 'mongodb';
+import { MongoClient, ObjectId, Collection } from 'mongodb';
 
 const router = express.Router();
 
@@ -11,7 +11,6 @@ const getCollection = async (): Promise<Collection> => {
   }
   return client.db("usersdb").collection("users");
 };
-
 
 router.post("/users", async (req: Request, res: Response) => {
   try {
