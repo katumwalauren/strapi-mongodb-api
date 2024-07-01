@@ -35,4 +35,35 @@ router.get("/users", async (req: Request, res: Response) => {
   }
 });
 
+
+router.put("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const collection = await getCollection();
+    const { id } = req.params;
+    const { name, email, password, createdTime } = req.body;
+
+    const updatedUser = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          name,
+          email,
+          password,
+          createdTime,
+        },
+      }
+    );
+
+    if (updatedUser.modifiedCount === 0) {
+      res.status(404).send("User not found");
+      return;
+    }
+
+    res.status(200).send("User updated successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 export default router;
