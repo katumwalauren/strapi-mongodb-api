@@ -4,24 +4,16 @@ dotenv.config();
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { connectToMongoDB } from "./database";
+import morgan from 'morgan';
 import router from "./routes"; 
 import SomeModel from "./models/UserModel";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(morgan('dev'));
 
-app.use("/api", router);
-
-app.get("/api/data", async (req: Request, res: Response) => {
-  try {
-    const data = await SomeModel.find(); 
-    res.json(data);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+app.use("/api", morgan(':method :url :status :res[content-length] - :response-time ms'), router)
 
 const port = process.env.PORT || 5000;
 
