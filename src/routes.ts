@@ -1,13 +1,13 @@
-import express, { Request, Response } from 'express';
-import { getConnectedClient } from './database';
-import { MongoClient, ObjectId, Collection } from 'mongodb';
+import express, { Request, Response } from "express";
+import { getConnectedClient } from "./database";
+import { MongoClient, ObjectId, Collection } from "mongodb";
 
 const router = express.Router();
 
 const getCollection = async (): Promise<Collection> => {
   const client: MongoClient | undefined = await getConnectedClient();
   if (!client) {
-    throw new Error('Failed to get a connected client');
+    throw new Error("Failed to get a connected client");
   }
   return client.db("usersdb").collection("users");
 };
@@ -35,7 +35,6 @@ router.get("/users", async (req: Request, res: Response) => {
   }
 });
 
-
 router.put("/users/:id", async (req: Request, res: Response) => {
   try {
     const collection = await getCollection();
@@ -60,6 +59,28 @@ router.put("/users/:id", async (req: Request, res: Response) => {
     }
 
     res.status(200).send("User updated successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.get("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const collection = await getCollection();
+    const userId = req.params.id;
+
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).send("Invalid user ID format");
+    }
+
+    const user = await collection.findOne({ _id: new ObjectId(userId) });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
