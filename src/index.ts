@@ -1,12 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import { connectToMongoDB } from "./database";
 import morgan from 'morgan';
-import router from "./routes"; 
-import SomeModel from "./models/UserModel";
+import router from "./routes";
 
 const app = express();
 app.use(express.json());
