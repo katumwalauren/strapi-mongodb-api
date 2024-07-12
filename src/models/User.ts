@@ -1,10 +1,14 @@
+
 import Email from "./User/Email";
 import Name from "./User/Name";
+import DateOfBirth from "./User/DateOfBirth";
+import Password from "./User/Password";
 
 export interface User {
   name: Name;
   email: Email;
-  // TODO: add all other user properties/fields
+  dateOfBirth: DateOfBirth;
+  password: Password;
 }
 
 export type UserJson = Record<string, string>;
@@ -13,7 +17,8 @@ export function decode(body: UserJson): User {
   return {
     name: new Name(body.name),
     email: new Email(body.email),
-    // TODO: add more properties here
+    dateOfBirth: new DateOfBirth(new Date(body.dateOfBirth)),
+    password: new Password(body.password),
   };
 }
 
@@ -21,6 +26,7 @@ export function encode(user: User): UserJson {
   return {
     name: user.name.get(),
     email: user.email.get(),
-    // TODO: add more properties here
+    dateOfBirth: user.dateOfBirth.get().toISOString(),
+    password: user.password.get(),
   };
 }
