@@ -14,9 +14,11 @@ export default class Email {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(email)) {
       throw new ParseException("Invalid email format.");
     }
+
 
     if (email.length > 254) {
       throw new ParseException("Email should be less than 255 characters.");
