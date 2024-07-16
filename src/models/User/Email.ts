@@ -19,7 +19,6 @@ export default class Email {
       throw new ParseException("Invalid email format.");
     }
 
-
     if (email.length > 254) {
       throw new ParseException("Email should be less than 255 characters.");
     }
@@ -29,15 +28,6 @@ export default class Email {
 
     if (disposableDomains.includes(emailDomain)) {
       throw new ParseException("Disposable email addresses are not allowed.");
-    }
-
-    const commonTypos: { [key: string]: string } = { 
-      "gnail.com": "gmail.com", 
-      "hotnail.com": "hotmail.com" 
-    };
-
-    if (commonTypos[emailDomain]) {
-      throw new ParseException(`Did you mean ${email.split("@")[0]}@${commonTypos[emailDomain]}?`);
     }
   }
 
