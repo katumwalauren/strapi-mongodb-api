@@ -1,4 +1,3 @@
-
 import Email from "./User/Email";
 import Name from "./User/Name";
 import DateOfBirth from "./User/DateOfBirth";
@@ -23,7 +22,10 @@ export function decode(body: UserJson): User {
       password: new Password(body.password),
     };
   } catch (error) {
-    throw new ParseException("Invalid user data");
+    if (error instanceof ParseException) {
+      throw error;  
+    }
+    throw new ParseException("Invalid user data");  
   }
 }
 
@@ -35,3 +37,4 @@ export function encode(user: User): UserJson {
     password: user.password.get(),
   };
 }
+
