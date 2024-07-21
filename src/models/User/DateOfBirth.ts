@@ -1,4 +1,3 @@
-
 import ParseException from "../../exceptions/ParseException";
 
 export default class DateOfBirth {
@@ -22,14 +21,7 @@ export default class DateOfBirth {
     }
   }
 
-  get(): Date {
-    return this.dob;
-  }
-
   getFormattedDate(): string {
-    const year = this.dob.getFullYear();
-    const month = (this.dob.getMonth() + 1).toString().padStart(2, '0');
-    const day = this.dob.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return this.dob.toISOString().split('T')[0];
   }
 }

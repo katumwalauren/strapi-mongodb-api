@@ -1,4 +1,3 @@
-
 import Email from "./User/Email";
 import Name from "./User/Name";
 import DateOfBirth from "./User/DateOfBirth";
@@ -15,16 +14,12 @@ export interface User {
 export type UserJson = Record<string, string>;
 
 export function decode(body: UserJson): User {
-  try {
-    return {
-      name: new Name(body.name),
-      email: new Email(body.email),
-      dateOfBirth: new DateOfBirth(new Date(body.dateOfBirth)),
-      password: new Password(body.password),
-    };
-  } catch (error) {
-    throw new ParseException("Invalid user data");
-  }
+  return {
+    name: new Name(body.name),
+    email: new Email(body.email),
+    dateOfBirth: new DateOfBirth(new Date(body.dateOfBirth)),
+    password: new Password(body.password),
+  };
 }
 
 export function encode(user: User): UserJson {
@@ -35,3 +30,4 @@ export function encode(user: User): UserJson {
     password: user.password.get(),
   };
 }
+
