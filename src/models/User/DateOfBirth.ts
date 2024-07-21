@@ -10,7 +10,7 @@ export default class DateOfBirth {
 
   private validate(dateOfBirth: Date): void {
     const now = new Date();
-    
+
     if (dateOfBirth.getTime() > now.getTime()) {
       throw new ParseException("Date of birth cannot be in the future");
     }
@@ -24,4 +24,5 @@ export default class DateOfBirth {
   getFormattedDate(): string {
     return this.dob.toISOString().split('T')[0];
   }
+
 }
