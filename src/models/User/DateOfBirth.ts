@@ -21,7 +21,7 @@ export default class DateOfBirth {
     }
   }
 
-  get(): Date {
-    return this.dob;
+  getFormattedDate(): string {
+    return this.dob.toISOString().split('T')[0];
   }
 }

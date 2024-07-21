@@ -26,7 +26,7 @@ export function encode(user: User): UserJson {
   return {
     name: user.name.get(),
     email: user.email.get(),
-    dateOfBirth: user.dateOfBirth.get().toISOString(),
+    dateOfBirth: user.dateOfBirth.getFormattedDate(),
     password: user.password.get(),
   };
 }
