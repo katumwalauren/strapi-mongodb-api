@@ -1,4 +1,4 @@
-import ParseException from "../exceptions/ParseException"
+import ParseException from "../exceptions/ParseException";
 
 type NonNullableUnknown = NonNullable<unknown>;
 

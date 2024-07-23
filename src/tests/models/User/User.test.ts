@@ -26,7 +26,7 @@ describe("User", () => {
           password: new Password("Password1!"),
         });
       });
-    })
+    });
 
     describe("when invalid user json is provided", () => {
       describe("when json is missing a key", () => {

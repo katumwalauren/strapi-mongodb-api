@@ -39,7 +39,7 @@ describe("Json", () => {
             name: "John Doe",
             email: "john@gmail.com",
             city: "kampala",
-          }
+          };
 
           expect(() => parseJson(json, ["name", "email"])).toThrow(
             new ParseException("Json has unexpected keys: city")
