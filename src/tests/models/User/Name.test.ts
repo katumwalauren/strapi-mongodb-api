@@ -16,7 +16,7 @@ describe("Name", () => {
         expect(() => new Name("Jo")).toThrow(
           new ParseException("Name should be at least 3 characters")
         );
-      }):
+      });
 
       test("throws an exception for a name with more than 100 characters", () => {
         const longName = "J".repeat(101);
