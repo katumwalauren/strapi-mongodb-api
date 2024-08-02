@@ -27,13 +27,13 @@ describe("Name", () => {
 
       test("throws an exception for a null name", () => {
         expect(() => new Name(null as any)).toThrow(
-          new ParseException("name should not be null")
+          new ParseException("Name should not be null")
         );
       });
 
       test("throws an exception for an undefined name", () => {
         expect(() => new Name(undefined as any)).toThrow(
-          new ParseException("name should not be undefined")
+          new ParseException("Name should not be undefined")
         );
       });
     });
