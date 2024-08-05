@@ -1,4 +1,3 @@
-
 import ParseException from "../../exceptions/ParseException";
 
 export default class Name {
