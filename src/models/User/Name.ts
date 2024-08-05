@@ -1,3 +1,4 @@
+
 import ParseException from "../../exceptions/ParseException";
 
 export default class Name {
@@ -9,14 +10,6 @@ export default class Name {
   }
 
   private validate(name: string): void {
-    if (name === null) {
-      throw new ParseException("Name should not be null");
-    }
-
-    if (name === undefined) {
-      throw new ParseException("Name should not be undefined");
-    }
-
     if (name.length < 3) {
       throw new ParseException("Name should be at least 3 characters");
     }
@@ -30,4 +23,3 @@ export default class Name {
     return this.name;
   }
 }
-
