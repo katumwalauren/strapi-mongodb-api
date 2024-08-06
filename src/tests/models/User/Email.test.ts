@@ -3,30 +3,24 @@ import Email from "../../../models/User/Email";
 import ParseException from "../../../exceptions/ParseException";
 
 describe("Email", () => {
-  test("can be constructed with a valid email", () => {
-    const email = new Email("john@gmail.com");
-    expect(email).toBeInstanceOf(Email);
-    expect(email.get()).toBe("john@gmail.com");
+  test("can be constructed with valid emails", () => {
+    const validEmails = ["john@gmail.com", "test@example.com", "user.name@domain.co", "user+name@domain.com"];
+
+    validEmails.forEach(email => {
+      const emailInstance = new Email(email);
+      expect(emailInstance.get()).toBe(email);
+    });
   });
 
   test("throws an exception for an invalid email", () => {
-    expect(() => new Email("invalid-email")).toThrow(ParseException);
-  });
-
-  test("throws an exception for an empty email", () => {
-    expect(() => new Email("")).toThrow(ParseException);
-  });
-
-  test("validates email format correctly", () => {
-    const validEmails = ["test@example.com", "user.name@domain.co", "user+name@domain.com"];
-    const invalidEmails = ["plainaddress", "@missingusername.com", "username@.com"];
-
-    validEmails.forEach(email => {
-      expect(() => new Email(email)).not.toThrow(ParseException);
-    });
+    const invalidEmails = ["plainaddress", "@missingusername.com", "username@.com", "invalid-email"];
 
     invalidEmails.forEach(email => {
       expect(() => new Email(email)).toThrow(ParseException);
     });
+  });
+
+  test("throws an exception for an empty email", () => {
+    expect(() => new Email("")).toThrow(ParseException);
   });
 });
